@@ -1,8 +1,14 @@
 ﻿using System;
 
+
 namespace Fitness.BL.Model
 {
-    class Gender
+    /// <summary>
+    /// Gender.
+    /// </summary>
+    [Serializable]
+    
+    public class Gender
     {
         /// <summary>
         /// Name.

@@ -1,8 +1,15 @@
 ﻿using System;
 
+
+
 namespace Fitness.BL.Model
+
 {
-    class User
+    /// <summary>
+    /// User
+    /// </summary>
+    [Serializable]
+    public class User
     {
         #region properties
         /// <summary>
