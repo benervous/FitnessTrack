@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
@@ -15,26 +16,49 @@ namespace Fitness.BL.Controller
     public class UserController
     {
         /// <summary>
-        /// User.
+        /// User list.
         /// </summary>
-        public User user { get; }
-        public UserController(string userName, string genderName, DateTime birth, 
-            double height, double weight)
+        public List<User> users { get; }
+        public User CurrentUser { get; }
+        /// <summary>
+        /// User controller.
+        /// </summary>
+        /// <param name="userName">User Name.</param>
+        /// <param name="genderName">Gender Name.</param>
+        /// <param name="birth">Birthday.</param>
+        /// <param name="height">Height.</param>
+        /// <param name="weight">Weight.</param>
+        public UserController(string userName)
         {
-            //TODO: checker
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentNullException("User name can't be null or white space", nameof(userName));
+            }
 
-            var gender = new Gender(genderName);
-            user = new User(userName, gender, birth, weight, height);
+            users = GetUserData();
+            CurrentUser = users.SingleOrDefault(u => u.Name == userName);
+            if(CurrentUser == null) { 
+                CurrentUser = new User(userName);
+                users.Add(CurrentUser);
+                Save();
+            }
+
+           
             
         }
-        public UserController()
+        /// <summary>
+        /// Get user data.
+        /// </summary>
+        /// <returns>User data.</returns>
+        public List<User> GetUserData()
         {
             var formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
-                if (formatter.Deserialize(fs) is User user)
-                { this.user = user; }
-                // TODO:  what if user load was failed
+                if (formatter.Deserialize(fs) is List<User> users)
+                { return users; }
+                else { return new List<User>(); }
+                
             }
 
 
@@ -47,7 +71,7 @@ namespace Fitness.BL.Controller
             var formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
-                formatter.Serialize(fs, user);
+                formatter.Serialize(fs, users);
             }
         }
      

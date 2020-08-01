@@ -76,6 +76,15 @@ namespace Fitness.BL.Model
             Weight = weight;
             Height = height;
         }
+        public User(string Username)
+        {
+            if (string.IsNullOrWhiteSpace(Username))
+            {
+                throw new ArgumentException("The name can't be Null or WhiteSpace.", nameof(Username));
+            }
+            Name = Username;
+
+        }
         /// <summary>
         /// Get user info.
         /// </summary>
