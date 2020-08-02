@@ -19,19 +19,23 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Gender.
         /// </summary>
-        public Gender Gender { get; }
+        public Gender Gender { get; set; }
         /// <summary>
         /// BirthDate.
         /// </summary>
-        public DateTime Birth { get; }
+        public DateTime Birth { get; set; }
         /// <summary>
         /// Weight.
         /// </summary>
-        public double Weight { get; }
+        public double Weight { get; set; }
         /// <summary>
         /// Height.
         /// </summary>
-        public double Height { get; }
+        public double Height { get; set; }
+        /// <summary>
+        /// Age.
+        /// </summary>
+        public int Age { get { return DateTime.Now.Year - Birth.Year; } }
         #endregion
         /// <summary>
         /// Create new user.
@@ -76,22 +80,22 @@ namespace Fitness.BL.Model
             Weight = weight;
             Height = height;
         }
-        public User(string Username)
+        public User(string name)
         {
-            if (string.IsNullOrWhiteSpace(Username))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException("The name can't be Null or WhiteSpace.", nameof(Username));
+                throw new ArgumentException("The name can't be Null or WhiteSpace.", nameof(name));
             }
-            Name = Username;
+            Name = name;
 
         }
         /// <summary>
         /// Get user info.
         /// </summary>
-        /// <returns>Name, gender, birthdate, weight, height.</returns>
+        /// <returns>UserName, Age..</returns>
         public override string ToString()
         {
-            return $"Name:{Name}, Gender:{Gender}, BirthDate:{Birth}, Weight: {Weight}, Height:{Height}.";
+            return $"Name:{Name}, Age: {Age}, {Birth}";
         }
     }
 }

@@ -7,9 +7,10 @@ namespace Fitness.BL.Model
     /// Gender.
     /// </summary>
     [Serializable]
-    
+
     public class Gender
     {
+        //TODO: add gender array
         /// <summary>
         /// Name.
         /// </summary>
