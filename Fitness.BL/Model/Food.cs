@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Fitness.BL.Model
 {
+    /// <summary>
+    /// Food.
+    /// </summary>
     class Food
     {
         /// <summary>
