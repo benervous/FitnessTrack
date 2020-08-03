@@ -12,12 +12,12 @@ namespace Fitness.BL.Controller
     /// </summary>
     [Serializable]
 
-    public class UserController
+    public class UserController : ControllerBase
     {
         /// <summary>
         /// User list.
         /// </summary>
-        public List<User> users { get; }
+        public List<User> Users { get; }
         /// <summary>
         /// CurrentUser
         /// </summary>
@@ -37,13 +37,13 @@ namespace Fitness.BL.Controller
                 throw new ArgumentNullException("User name can't be null or white space", nameof(name));
             }
 
-            users = GetUserData();
-            CurrentUser = users.SingleOrDefault(u => u.Name == name);
+            Users = GetUserData();
+            CurrentUser = Users.SingleOrDefault(u => u.Name == name);
             if (CurrentUser == null)
             {
                 IsCurrentUserNew = true;
                 CurrentUser = new User(name);
-                users.Add(CurrentUser);
+                Users.Add(CurrentUser);
                 Save();
             }
         }
@@ -53,16 +53,7 @@ namespace Fitness.BL.Controller
         /// <returns>User data.</returns>
         private List<User> GetUserData()
         {
-            var formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                if (fs.Length >  0 && formatter.Deserialize(fs) is List<User> Users)
-                { return Users; }
-                else
-                {
-                    return new List<User>();
-                }
-            }
+            return Load<List<User>>("users.dat") ?? new List<User>();
         }
         /// <summary>
         /// Set additional info for a new user
@@ -106,11 +97,7 @@ namespace Fitness.BL.Controller
         /// </summary>
         public void Save()
         {
-            var formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, users);
-            }
+            Save("users.dat", Users);
         }
     }
 }
