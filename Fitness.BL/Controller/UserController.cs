@@ -56,7 +56,7 @@ namespace Fitness.BL.Controller
             var formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
-                if (fs.Length != 0 && formatter.Deserialize(fs) is List<User> Users)
+                if (fs.Length >  0 && formatter.Deserialize(fs) is List<User> Users)
                 { return Users; }
                 else
                 {
@@ -64,12 +64,37 @@ namespace Fitness.BL.Controller
                 }
             }
         }
+        /// <summary>
+        /// Set additional info for a new user
+        /// </summary>
+        /// <param name="gender">Gender.</param>
+        /// <param name="birth">Birthday.</param>
+        /// <param name="weight">Weight.</param>
+        /// <param name="height">Height.</param>
         public void SetAdditionalUserData(string gender,
                     DateTime birth,
                     double weight,
                     double height)
         {
-            //TODO: make checker
+            #region chech_input
+            if (gender == null)
+            {
+                throw new ArgumentException("Gender can't be null.", nameof(gender));
+            }
+
+            if (birth < DateTime.Parse("01.01.1938") || birth > DateTime.Now)
+            {
+                throw new ArgumentException("Unbelieveble date of birth.", nameof(birth));
+            }
+            if (height <= 0)
+            {
+                throw new ArgumentException("Height can't be <=0.", nameof(height));
+            }
+            if (weight <= 0)
+            {
+                throw new ArgumentException("Weight can't be <=0.", nameof(weight));
+            }
+            #endregion
             CurrentUser.Gender = new Gender(gender);
             CurrentUser.Birth = birth;
             CurrentUser.Weight = weight;
