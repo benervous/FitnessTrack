@@ -20,9 +20,9 @@ namespace Fitness.BL.Model
         /// </summary>
         public DateTime Moment { get; }
         /// <summary>
-        /// List of food and weight.
+        /// Collecion of food_name and weight.
         /// </summary>
-        public Dictionary<Food, double> Foods { get; }
+        public Dictionary<Food, double> Food { get; }
         /// <summary>
         /// Create eating process.
         /// </summary>
@@ -32,23 +32,23 @@ namespace Fitness.BL.Model
 
             this.User = User ?? throw new ArgumentException(("User can't be null"), nameof(User));
             Moment = DateTime.UtcNow;
-            Foods = new Dictionary<Food, double>();
+            Food = new Dictionary<Food, double>();
         }
         /// <summary>
-        /// Add food.
+        /// Add food to a food collection.
         /// </summary>
-        /// <param name="food">Food.</param>
-        /// <param name="weight">Weight.</param>
+        /// <param name="food">Food name.</param>
+        /// <param name="weight">Food weight.</param>
         public void Add(Food food, double weight)
         {
-            var product = Foods.Keys.FirstOrDefault(f => f.Name.Equals(food));
+            var product = Food.Keys.FirstOrDefault(f => f.Food_Name.Equals(food));
             if (product == null)
             {
-                Foods.Add(product, weight);
+                Food.Add(product, weight);
             }
             else
             {
-                Foods[product] += weight;
+                Food[product] += weight;
             }
         }
     }

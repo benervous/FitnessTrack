@@ -7,11 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Fitness.BL.Controller
 {
-    /// <summary>
-    /// App user
-    /// </summary>
+    
     [Serializable]
-
+    /// <summary>
+    /// App user.
+    /// </summary>
     public class UserController : ControllerBase
     {
         /// <summary>
@@ -19,17 +19,17 @@ namespace Fitness.BL.Controller
         /// </summary>
         public List<User> Users { get; }
         /// <summary>
-        /// CurrentUser
+        /// Current User.
         /// </summary>
         public User CurrentUser { get; }
         /// <summary>
-        /// Is current user new 
+        /// Is current user new. 
         /// </summary>
         public bool IsCurrentUserNew { get; } = false;
         /// <summary>
         /// UserController
         /// </summary>
-        /// <param name="name">Name</param>
+        /// <param name="name">User name.</param>
         public UserController(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -48,7 +48,7 @@ namespace Fitness.BL.Controller
             }
         }
         /// <summary>
-        /// Get user data.
+        /// Get users data.
         /// </summary>
         /// <returns>User data.</returns>
         private List<User> GetUserData()
@@ -93,7 +93,7 @@ namespace Fitness.BL.Controller
 
         }
         /// <summary>
-        /// Save the app user
+        /// Save the app user data.
         /// </summary>
         public void Save()
         {

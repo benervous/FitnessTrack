@@ -7,11 +7,17 @@ using System.Text;
 
 namespace Fitness.BL.Model
 {
+    /// <summary>
+    /// Controller basement.
+    /// </summary>
     public abstract class ControllerBase
     {
+        /// <summary>
+        /// File name.
+        /// </summary>
         public string FileName;
         /// <summary>
-        /// Save.
+        /// Save data.
         /// </summary>
         /// <param name="FileName">File name.</param>
         /// <param name="item">Object item to save.</param>
@@ -26,8 +32,8 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Load serialized file.
         /// </summary>
-        /// <typeparam name="T">Optional name of collection for users</typeparam>
-        /// <param name="FileName">File name</param>
+        /// <typeparam name="T">Optional name of collection for users.</typeparam>
+        /// <param name="FileName">File name.</param>
         /// <returns></returns>
         protected T Load<T>(string FileName) {
             var formatter = new BinaryFormatter();

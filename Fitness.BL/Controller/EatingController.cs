@@ -6,15 +6,18 @@ using System.Text;
 
 namespace Fitness.BL.Controller
 {
+    /// <summary>
+    /// Eating controller.
+    /// </summary>
     class EatingController:ControllerBase
     {
         #region properties.
         /// <summary>
-        /// Food file name.
+        /// Food data file name.
         /// </summary>
         private const string FILE_NAME_FOOD = "food.dat";
         /// <summary>
-        /// Eating file name.
+        /// Eating data file name.
         /// </summary>
         private const string FILE_NAME_EATING = "eating.dat";
         /// <summary>
@@ -31,28 +34,28 @@ namespace Fitness.BL.Controller
         public Eating Eating { get; }
         #endregion
         /// <summary>
-        /// Eating controller.
+        /// User's eating.
         /// </summary>
         /// <param name="User"></param>
         public EatingController(User User)
         {
             this.User = User ?? throw new ArgumentNullException(("User can't be null"), nameof(User));
-            Food = GetAllFood();
+            Food = GetFood();
             Eating = GetEating();
         }
         /// <summary>
         /// Get Eating.
         /// </summary>
-        /// <returns>Eating dictionary.</returns>
+        /// <returns>Existing eating dictionary or new eating.</returns>
         private Eating GetEating()
         {
             return Load<Eating>(FILE_NAME_EATING) ?? new Eating(User);
         }
         /// <summary>
-        /// Get Food Collection.
+        /// Get Food.
         /// </summary>
-        /// <returns>Food list.</returns>
-        private List<Food> GetAllFood()
+        /// <returns>Existing food list or new food list.</returns>
+        private List<Food> GetFood()
         {
             return Load<List<Food>>(FILE_NAME_FOOD) ?? new List<Food>();
         }
@@ -65,14 +68,14 @@ namespace Fitness.BL.Controller
             Save(FILE_NAME_EATING, Eating);
         }
         /// <summary>
-        /// Add food by it's name.
+        /// Add food by it's name if it is existing in the food list.
         /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="weight"></param>
+        /// <param name="Food_Name">Food name.</param>
+        /// <param name="weight">Food weight.</param>
         /// <returns>True.</returns>
-        public bool Add(string Name, double weight)
+        public bool Add(string Food_Name, double weight)
         {
-            var food = Food.SingleOrDefault(f => f.Name == Name);
+            var food = Food.SingleOrDefault(f => f.Food_Name == Food_Name);
             if (food != null)
             {
                 Eating.Add(food, weight);
@@ -83,13 +86,13 @@ namespace Fitness.BL.Controller
 
         }
         /// <summary>
-        /// Add food by its type.
+        /// Add new food if it's not exist in the food list or add it if it exists.
         /// </summary>
-        /// <param name="Food"></param>
-        /// <param name="weight"></param>
+        /// <param name="Food">Food object.</param>
+        /// <param name="weight">Food weight.</param>
         public void Add(Food Food, double weight)
         {
-            var product = this.Food.SingleOrDefault(f=>f.Name == Food.Name);
+            var product = this.Food.SingleOrDefault(f=>f.Food_Name == Food.Food_Name);
             if(product == null)
             {
                 this.Food.Add(Food);

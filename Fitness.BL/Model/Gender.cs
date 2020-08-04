@@ -3,37 +3,37 @@
 
 namespace Fitness.BL.Model
 {
+    [Serializable]
+
     /// <summary>
     /// Gender.
     /// </summary>
-    [Serializable]
-
     public class Gender
     {
         //TODO: add gender array
         /// <summary>
-        /// Name.
+        /// GenderName.
         /// </summary>
-        public string Name { get; }
+        public string GenderName { get; }
         /// <summary>
         /// Create new gender.
         /// </summary>
         /// <param name="Name">Name.</param>
-        public Gender(string Name)
+        public Gender(string GenderName)
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            if (string.IsNullOrWhiteSpace(GenderName))
             {
-                throw new ArgumentException("The gender can't be Null or WhiteSpace", nameof(Name));
+                throw new ArgumentException("The gender can't be Null or WhiteSpace", nameof(GenderName));
             }
-            this.Name = Name;
+            this.GenderName = GenderName;
         }
         /// <summary>
-        /// Get Name.
+        /// Get Gender.
         /// </summary>
-        /// <returns>Name.</returns>
+        /// <returns>Gender.</returns>
         public override string ToString()
         {
-            return Name;
+            return GenderName;
         }
     }
 }

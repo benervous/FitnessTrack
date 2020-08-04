@@ -10,48 +10,48 @@ namespace Fitness.BL.Model
     class Food
     {
         /// <summary>
-        /// Name.
+        /// Food_Name.
         /// </summary>
-        public string Name { get; }
+        public string Food_Name { get; }
         /// <summary>
-        /// Calories.
+        /// Calories per 1 gramm.
         /// </summary>
         public double Calories { get; }
         /// <summary>
-        /// Proteins.
+        /// Proteins per 1 gramm.
         /// </summary>
         public double Proteins { get; }
         /// <summary>
-        /// Fat.
+        /// Fat per 1 gramm.
         /// </summary>
         public double Fat { get; }
-        /// <summary>
-        /// Carbohydrates.
+         /// <summary>
+        /// Carbohydrates per 1 gramm.
         /// </summary>
         public double Carbohydrates { get; }
         /// <summary>
-        /// Create food by its name.
+        /// Create food by its name with default params.
         /// </summary>
-        /// <param name="Name">Name.</param>
-        public Food(string Name): this(Name, 0, 0 , 0 , 0) { }
+        /// <param name="Name">Food_Name.</param>
+        public Food(string Food_Name): this(Food_Name, 0, 0 , 0 , 0) { }
         /// <summary>
-        /// Create new food.
+        /// Create new food and initialize params as param per 100 gramm.
         /// </summary>
-        /// <param name="Name">Name.</param>
-        /// <param name="Calories">Calories.</param>
-        /// <param name="Proteins">Proteins.</param>
-        /// <param name="Fat">Fat.</param>
-        /// <param name="Carbohydrates">Carbohydrates.</param>
-        public Food(string Name, double Calories, double Proteins, double Fat, double Carbohydrates)
+        /// <param name="Food_Name">Name of food.</param>
+        /// <param name="Calories">Calories per 100 gramm.</param>
+        /// <param name="Proteins">Proteins per 100 gramm.</param>
+        /// <param name="Fat">Fat per 100 gramm.</param>
+        /// <param name="Carbohydrates">Carbohydrates per 100 gramm.</param>
+        public Food(string Food_Name, double Calories, double Proteins, double Fat, double Carbohydrates)
         {
             #region check_input
-            if (string.IsNullOrWhiteSpace(Name)) { throw new ArgumentException(("Name can't be null or white space"), nameof(Name)); }
+            if (string.IsNullOrWhiteSpace(Food_Name)) { throw new ArgumentException(("Name can't be null or white space"), nameof(Food_Name)); }
             if (Calories <= 0) { throw new ArgumentException(("Calories can't be <=0"), nameof(Calories)); }
             if (Proteins <= 0) { throw new ArgumentException(("Proteins can't be <=0"), nameof(Proteins)); }
             if (Fat <= 0) { throw new ArgumentException(("Fat can't be <=0"), nameof(Fat)); }
             if (Carbohydrates <= 0) { throw new ArgumentException(("Calories can't be <=0"), nameof(Carbohydrates)); }
             #endregion
-            this.Name = Name;
+            this.Food_Name = Food_Name;
             this.Calories = Calories/100.0;
             this.Proteins = Proteins/100.0;
             this.Fat = Fat/100.0;
