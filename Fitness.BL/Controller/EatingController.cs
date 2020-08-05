@@ -9,7 +9,7 @@ namespace Fitness.BL.Controller
     /// <summary>
     /// Eating controller.
     /// </summary>
-    class EatingController:ControllerBase
+    public class EatingController:ControllerBase
     {
         #region properties.
         /// <summary>
@@ -66,25 +66,7 @@ namespace Fitness.BL.Controller
         {
             Save(FILE_NAME_FOOD, Food);
             Save(FILE_NAME_EATING, Eating);
-        }
-        /// <summary>
-        /// Add food by it's name if it is existing in the food list.
-        /// </summary>
-        /// <param name="Food_Name">Food name.</param>
-        /// <param name="weight">Food weight.</param>
-        /// <returns>True.</returns>
-        public bool Add(string Food_Name, double weight)
-        {
-            var food = Food.SingleOrDefault(f => f.Food_Name == Food_Name);
-            if (food != null)
-            {
-                Eating.Add(food, weight);
-                Save();
-                return true;
-            }
-            return false;
-
-        }
+        }  
         /// <summary>
         /// Add new food if it's not exist in the food list or add it if it exists.
         /// </summary>
@@ -92,6 +74,9 @@ namespace Fitness.BL.Controller
         /// <param name="weight">Food weight.</param>
         public void Add(Food Food, double weight)
         {
+            if(Food == null) { throw new ArgumentNullException(("Food can't be null"), nameof(Food)); }
+            if(weight == null ) { throw new ArgumentNullException(("Weight can't be <=0"), nameof(weight)); }
+
             var product = this.Food.SingleOrDefault(f=>f.Food_Name == Food.Food_Name);
             if(product == null)
             {

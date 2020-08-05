@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Fitness.BL.Model
 {
+    [Serializable]
     /// <summary>
     /// Food.
     /// </summary>
-    class Food
+    public class Food
     {
         /// <summary>
         /// Food_Name.

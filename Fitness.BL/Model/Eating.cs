@@ -6,10 +6,11 @@ using System.Transactions;
 
 namespace Fitness.BL.Model
 {
+    [Serializable]
     /// <summary>
     /// Eating.
     /// </summary>
-    class Eating
+    public class Eating
     {
         /// <summary>
         /// User.
@@ -44,7 +45,7 @@ namespace Fitness.BL.Model
             var product = Food.Keys.FirstOrDefault(f => f.Food_Name.Equals(food));
             if (product == null)
             {
-                Food.Add(product, weight);
+                Food.Add(food, weight);
             }
             else
             {
