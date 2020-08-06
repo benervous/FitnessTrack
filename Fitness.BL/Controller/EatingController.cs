@@ -74,8 +74,7 @@ namespace Fitness.BL.Controller
         /// <param name="weight">Food weight.</param>
         public void Add(Food Food, double weight)
         {
-            if(Food == null) { throw new ArgumentNullException(("Food can't be null"), nameof(Food)); }
-            if(weight == null ) { throw new ArgumentNullException(("Weight can't be <=0"), nameof(weight)); }
+            if(weight <=0 ) { throw new ArgumentNullException(("Weight can't be <=0"), nameof(weight)); }
 
             var product = this.Food.SingleOrDefault(f=>f.Food_Name == Food.Food_Name);
             if(product == null)

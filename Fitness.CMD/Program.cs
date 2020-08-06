@@ -25,6 +25,7 @@ namespace Fitness.CMD
             }
 
             Console.WriteLine(UserController.CurrentUser);
+
             Console.ReadLine();
         }
 
