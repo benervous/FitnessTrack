@@ -50,7 +50,7 @@ namespace Fitness.BL.Model
             if (Calories <= 0) { throw new ArgumentException(("Calories can't be <=0"), nameof(Calories)); }
             if (Proteins <= 0) { throw new ArgumentException(("Proteins can't be <=0"), nameof(Proteins)); }
             if (Fat <= 0) { throw new ArgumentException(("Fat can't be <=0"), nameof(Fat)); }
-            if (Carbohydrates <= 0) { throw new ArgumentException(("Calories can't be <=0"), nameof(Carbohydrates)); }
+            if (Carbohydrates <= 0) { throw new ArgumentException(("Carbohydrates can't be <=0"), nameof(Carbohydrates)); }
             #endregion
             this.Food_Name = Food_Name;
             this.Calories = Calories/100.0;

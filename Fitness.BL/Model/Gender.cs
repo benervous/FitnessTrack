@@ -10,7 +10,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public class Gender
     {
-        //TODO: add gender array
+        
         /// <summary>
         /// GenderName.
         /// </summary>

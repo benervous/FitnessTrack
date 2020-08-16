@@ -38,7 +38,7 @@ namespace Fitness.BL.Model
         public int Age { get { return DateTime.Now.Year - Birth.Year; } }
         #endregion
         /// <summary>
-        /// Create new user from Data.
+        /// Create new user with data.
         /// </summary>
         /// <param name="name">Name.</param>
         /// <param name="gender">Gender.</param>
@@ -81,7 +81,7 @@ namespace Fitness.BL.Model
             Height = height;
         }
         /// <summary>
-        /// Create absolute new user.
+        /// Create new user without data.
         /// </summary>
         /// <param name="name">Name.</param>
         public User(string name)

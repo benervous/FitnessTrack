@@ -10,13 +10,15 @@ namespace Fitness.CMD
         {
             Console.WriteLine("Welcome here! Please enter your name:");
             var name = Console.ReadLine();
-
+            
+            
             var UserController = new UserController(name);
+            var EatingController = new EatingController(UserController.CurrentUser);
             if (UserController.IsCurrentUserNew)
             {
                 Console.WriteLine("Please, enter your gender:");
                 string gender = Console.ReadLine();
-                Console.WriteLine("Please, enter your birth date dd.MM.yyyy:");
+                Console.WriteLine("Please, enter your birth date mm.DD.yyyy:");
                 DateTime birth = ParseBirth();
                 double height = ParseDouble("height");
                 double weight = ParseDouble("weight");
@@ -24,9 +26,34 @@ namespace Fitness.CMD
                 UserController.SetAdditionalUserData(gender, birth, weight, height);
             }
 
-            Console.WriteLine(UserController.CurrentUser);
+            //Console.WriteLine(UserController.CurrentUser);
+            Console.WriteLine("Write e if you want to add food: ");
+            var key = Console.ReadKey();
+            if(key.Key == ConsoleKey.E)
+            {
+               var food = EnterEating();
+               EatingController.Add(food.Food, food.Weight);
+                foreach(var item in EatingController.Eating.Food)
+                {
+                    Console.WriteLine($"\t{item.Key.Food_Name} - {item.Value}");
+                }
+            }
 
             Console.ReadLine();
+        }
+
+        private static (Food Food, double Weight) EnterEating()
+        {
+            Console.WriteLine("\nEnter the name of food: ");
+            var name = Console.ReadLine();
+            var calories = ParseDouble("calories");
+            var proteins = ParseDouble("proteins");
+            var fat = ParseDouble("fat");
+            var carbohydrates = ParseDouble("carbohydrates");
+            var weight = ParseDouble("weight");
+            var product = new Food(name, calories, proteins, fat, carbohydrates);
+            return (Food: product, Weight: weight);
+
         }
 
         private static DateTime ParseBirth()
